@@ -1,0 +1,20 @@
+# This directory will contain event images
+# Upload event images here with the following naming convention:
+# - Use lowercase letters and hyphens
+# - Supported formats: jpg, jpeg, png, gif, avif
+# - Recommended size: 800x600 pixels
+# - Maximum file size: 2MB
+
+# Required images for Cameroon events:
+# - techconference.jpg (Tech Conference 2025)
+# - musicfestival.jpg (Music Festival Summer)
+# - foodwine.png (Food & Wine Expo)
+# - business.jpg (Business Networking Event)
+# - artgallery.avif (Art Gallery Opening)
+
+# All events are located in Cameroon:
+# - Yaoundé, Cameroon
+# - Douala, Cameroon
+# - Bafoussam, Cameroon
+
+# Prices are in CFA (Central African Franc)
