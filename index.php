@@ -130,22 +130,14 @@ include 'includes/header.php';
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100 shadow-sm">
                             <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px; position: relative;">
-                                <?php if ($event['image']): ?>
+                                <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px; position: relative;">
                                     <img src="images/events/<?php echo htmlspecialchars($event['image']); ?>"
-                                         alt="<?php echo htmlspecialchars($event['name']); ?>"
-                                         class="img-fluid"
-                                         style="max-height: 100%; max-width: 100%; object-fit: cover; border-radius: 8px;"
-                                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                    <div class="d-flex align-items-center justify-content-center h-100 w-100" style="display: none; flex-direction: column;">
-                                        <i class="fas fa-image fa-3x text-muted mb-2"></i>
-                                        <small class="text-muted"><?php echo htmlspecialchars($event['name']); ?></small>
-                                    </div>
-                                <?php else: ?>
-                                    <div class="d-flex align-items-center justify-content-center h-100 w-100 flex-column">
-                                        <i class="fas fa-calendar-alt fa-3x text-muted mb-2"></i>
-                                        <small class="text-muted"><?php echo htmlspecialchars($event['name']); ?></small>
-                                    </div>
-                                <?php endif; ?>
+                                        alt="<?php echo htmlspecialchars($event['name']); ?>"
+                                        class="img-fluid"
+                                        style="max-height: 100%; max-width: 100%; object-fit: cover; border-radius: 8px;"
+                                        onerror="this.style.display='none';">
+                                </div>
+
                             </div>
                             
                             <div class="card-body d-flex flex-column">

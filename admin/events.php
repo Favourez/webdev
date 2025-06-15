@@ -155,20 +155,12 @@ include 'includes/header.php';
                                 <td>
                                     <div class="d-flex align-items-center">
                                         <div class="me-3">
-                                            <?php if ($event['image']): ?>
-                                                <img src="../images/events/<?php echo htmlspecialchars($event['image']); ?>" 
-                                                     alt="<?php echo htmlspecialchars($event['name']); ?>" 
-                                                     class="rounded" style="width: 50px; height: 40px; object-fit: cover;"
-                                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                                                <div style="display: none; width: 50px; height: 40px; background: #f8f9fa; border-radius: 4px; display: flex; align-items: center; justify-content: center;">
-                                                    <i class="fas fa-image text-muted"></i>
-                                                </div>
-                                            <?php else: ?>
-                                                <div style="width: 50px; height: 40px; background: #f8f9fa; border-radius: 4px; display: flex; align-items: center; justify-content: center;">
-                                                    <i class="fas fa-calendar text-muted"></i>
-                                                </div>
-                                            <?php endif; ?>
+                                            <img src="../images/events/<?php echo htmlspecialchars($event['image']); ?>" 
+                                                alt="<?php echo htmlspecialchars($event['name']); ?>" 
+                                                class="rounded" style="width: 50px; height: 40px; object-fit: cover;"
+                                                onerror="this.style.display='none';">
                                         </div>
+
                                         <div>
                                             <h6 class="mb-1"><?php echo htmlspecialchars($event['name']); ?></h6>
                                             <small class="text-muted"><?php echo htmlspecialchars($event['organizer']); ?></small>

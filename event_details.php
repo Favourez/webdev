@@ -34,24 +34,13 @@ include 'includes/header.php';
         <div class="col-lg-8">
             <div class="card shadow-sm mb-4">
                 <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 400px; position: relative;">
-                    <?php if ($event['image']): ?>
-                        <img src="images/events/<?php echo htmlspecialchars($event['image']); ?>"
-                             alt="<?php echo htmlspecialchars($event['name']); ?>"
-                             class="img-fluid"
-                             style="max-height: 100%; max-width: 100%; object-fit: cover; border-radius: 8px;"
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="d-flex align-items-center justify-content-center h-100 w-100" style="display: none; flex-direction: column;">
-                            <i class="fas fa-image fa-5x text-muted mb-3"></i>
-                            <h5 class="text-muted"><?php echo htmlspecialchars($event['name']); ?></h5>
-                        </div>
-                    <?php else: ?>
-                        <div class="d-flex align-items-center justify-content-center h-100 w-100 flex-column">
-                            <i class="fas fa-calendar-alt fa-5x text-muted mb-3"></i>
-                            <h5 class="text-muted"><?php echo htmlspecialchars($event['name']); ?></h5>
-                        </div>
-                    <?php endif; ?>
+                    <img src="images/events/<?php echo htmlspecialchars($event['image']); ?>"
+                        alt="<?php echo htmlspecialchars($event['name']); ?>"
+                        class="img-fluid"
+                        style="max-height: 100%; max-width: 100%; object-fit: cover; border-radius: 8px;"
+                        onerror="this.style.display='none';">
                 </div>
-                
+
                 <div class="card-body">
                     <h1 class="card-title mb-3"><?php echo htmlspecialchars($event['name']); ?></h1>
                     
