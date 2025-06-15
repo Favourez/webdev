@@ -22,13 +22,13 @@ try {
     
     // Get statistics
     $stmt = $pdo->prepare("
-        SELECT 
+        SELECT
             COUNT(*) as total_bookings,
             SUM(total_amount) as total_spent,
-            COUNT(CASE WHEN e.date >= CURDATE() THEN 1 END) as upcoming_events,
-            COUNT(CASE WHEN e.date < CURDATE() THEN 1 END) as past_events
-        FROM bookings b 
-        JOIN events e ON b.event_id = e.id 
+            COUNT(CASE WHEN CONCAT(e.date, ' ', e.time) >= NOW() THEN 1 END) as upcoming_events,
+            COUNT(CASE WHEN CONCAT(e.date, ' ', e.time) < NOW() THEN 1 END) as past_events
+        FROM bookings b
+        JOIN events e ON b.event_id = e.id
         WHERE b.user_id = ? AND b.booking_status = 'confirmed'
     ");
     $stmt->execute([$user_id]);
@@ -87,7 +87,7 @@ include 'includes/header.php';
         <div class="col-lg-3 col-md-6 mb-4">
             <div class="card dashboard-card shadow-sm h-100">
                 <div class="card-body text-center">
-                    <i class="fas fa-dollar-sign fa-3x text-warning mb-3"></i>
+                    <i class="fas fa-coins fa-3x text-warning mb-3"></i>
                     <div class="stat-number"><?php echo number_format($stats['total_spent'], 0); ?> CFA</div>
                     <div class="text-muted">Total Spent</div>
                 </div>
@@ -141,8 +141,11 @@ include 'includes/header.php';
                                 </thead>
                                 <tbody>
                                     <?php foreach ($bookings as $booking): ?>
-                                        <?php 
-                                        $is_upcoming = strtotime($booking['date']) >= strtotime('today');
+                                        <?php
+                                        // Check if event is upcoming (event date is today or in the future)
+                                        $event_datetime = strtotime($booking['date'] . ' ' . $booking['time']);
+                                        $current_datetime = time();
+                                        $is_upcoming = $event_datetime >= $current_datetime;
                                         $status_class = $booking['booking_status'] == 'confirmed' ? 'success' : 'danger';
                                         ?>
                                         <tr class="booking-row" data-type="<?php echo $is_upcoming ? 'upcoming' : 'past'; ?>">
@@ -184,7 +187,7 @@ include 'includes/header.php';
                                                 <span class="badge bg-primary"><?php echo $booking['quantity']; ?></span>
                                             </td>
                                             <td>
-                                                <strong>$<?php echo number_format($booking['total_amount'], 2); ?></strong>
+                                                <strong><?php echo number_format($booking['total_amount'], 0); ?> CFA</strong>
                                             </td>
                                             <td>
                                                 <span class="badge bg-<?php echo $status_class; ?>">

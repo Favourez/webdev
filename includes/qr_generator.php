@@ -48,11 +48,30 @@ class QRCodeGenerator {
      * @return string QR code URL
      */
     public static function generateBookingQR($booking) {
-        // Create URL to printable receipt instead of JSON data
-        $receiptUrl = 'http://localhost/webdev/print_receipt.php?ref=' . urlencode($booking['booking_reference']);
+        // Create URL that works for both mobile and desktop
+        // Mobile devices will download the ticket, desktop will redirect to website
+        $ticketUrl = self::getBaseUrl() . '/qr_ticket.php?ref=' . urlencode($booking['booking_reference']);
 
         // Use alternative QR server for better reliability
-        return self::generateQRCodeAlt($receiptUrl, 150);
+        return self::generateQRCodeAlt($ticketUrl, 150);
+    }
+
+    /**
+     * Get base URL for the application
+     * @return string Base URL
+     */
+    private static function getBaseUrl() {
+        $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
+        $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+        $script_dir = dirname($_SERVER['SCRIPT_NAME'] ?? '');
+
+        // Remove any trailing slashes and ensure we're at the root of the application
+        $base_path = rtrim($script_dir, '/');
+        if (strpos($base_path, '/webdev') === false) {
+            $base_path = '/webdev';
+        }
+
+        return $protocol . '://' . $host . $base_path;
     }
     
     /**

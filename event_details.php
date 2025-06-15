@@ -248,9 +248,11 @@ $(document).ready(function() {
     geocodeAddress(fullAddress);
 });
 
-// Geocode address using Nominatim API
+// Geocode address using Nominatim API with Cameroon focus
 function geocodeAddress(address) {
-    var nominatimUrl = 'https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(address);
+    // Add Cameroon to the search for better accuracy
+    var searchAddress = address + ', Cameroon';
+    var nominatimUrl = 'https://nominatim.openstreetmap.org/search?format=json&countrycodes=cm&q=' + encodeURIComponent(searchAddress);
 
     $.ajax({
         url: nominatimUrl,
@@ -267,23 +269,90 @@ function geocodeAddress(address) {
                            '&layer=mapnik&marker=' + lat + ',' + lon;
 
                 $('#location-map').attr('src', mapUrl);
+
+                // Update the map info with found location details
+                if (data[0].display_name) {
+                    console.log('Location found: ' + data[0].display_name);
+                }
+            } else {
+                // Fallback: try with just the city name
+                fallbackCitySearch(address);
             }
         },
         error: function() {
-            console.log('Could not geocode address');
+            console.log('Could not geocode address, trying fallback');
+            fallbackCitySearch(address);
         }
     });
+}
+
+// Fallback function to search for major Cameroon cities
+function fallbackCitySearch(address) {
+    var cityCoordinates = {
+        'yaoundé': { lat: 3.8480, lon: 11.5021 },
+        'yaounde': { lat: 3.8480, lon: 11.5021 },
+        'douala': { lat: 4.0511, lon: 9.7679 },
+        'bafoussam': { lat: 5.4781, lon: 10.4167 },
+        'bamenda': { lat: 5.9631, lon: 10.1591 },
+        'garoua': { lat: 9.3265, lon: 13.3958 },
+        'maroua': { lat: 10.5906, lon: 14.3197 },
+        'ngaoundéré': { lat: 7.3167, lon: 13.5833 },
+        'ngaoundere': { lat: 7.3167, lon: 13.5833 }
+    };
+
+    var cityFound = false;
+    var addressLower = address.toLowerCase();
+
+    for (var city in cityCoordinates) {
+        if (addressLower.includes(city)) {
+            var coords = cityCoordinates[city];
+            var bbox = (coords.lon - 0.05) + ',' + (coords.lat - 0.05) + ',' + (coords.lon + 0.05) + ',' + (coords.lat + 0.05);
+            var mapUrl = 'https://www.openstreetmap.org/export/embed.html?bbox=' + bbox +
+                       '&layer=mapnik&marker=' + coords.lat + ',' + coords.lon;
+
+            $('#location-map').attr('src', mapUrl);
+            cityFound = true;
+            console.log('Using fallback coordinates for: ' + city);
+            break;
+        }
+    }
+
+    if (!cityFound) {
+        // Default to Cameroon center
+        var defaultLat = 7.3697;
+        var defaultLon = 12.3547;
+        var bbox = (defaultLon - 2) + ',' + (defaultLat - 2) + ',' + (defaultLon + 2) + ',' + (defaultLat + 2);
+        var mapUrl = 'https://www.openstreetmap.org/export/embed.html?bbox=' + bbox +
+                   '&layer=mapnik&marker=' + defaultLat + ',' + defaultLon;
+
+        $('#location-map').attr('src', mapUrl);
+        console.log('Using default Cameroon coordinates');
+    }
 }
 
 // Get directions function
 function getDirections() {
     var venue = "<?php echo addslashes($event['venue']); ?>";
     var location = "<?php echo addslashes($event['location']); ?>";
-    var fullAddress = venue + ', ' + location;
+    var fullAddress = venue + ', ' + location + ', Cameroon';
 
-    // Open directions in new tab
-    var directionsUrl = 'https://www.openstreetmap.org/directions?to=' + encodeURIComponent(fullAddress);
-    window.open(directionsUrl, '_blank');
+    // Try multiple mapping services for better coverage in Cameroon
+    var services = [
+        {
+            name: 'OpenStreetMap',
+            url: 'https://www.openstreetmap.org/directions?to=' + encodeURIComponent(fullAddress)
+        },
+        {
+            name: 'Google Maps',
+            url: 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(fullAddress)
+        }
+    ];
+
+    // Show options to user
+    var serviceChoice = confirm('Choose mapping service:\nOK = OpenStreetMap\nCancel = Google Maps');
+    var selectedService = serviceChoice ? services[0] : services[1];
+
+    window.open(selectedService.url, '_blank');
 }
 </script>
 
