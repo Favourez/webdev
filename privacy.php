@@ -132,7 +132,7 @@ include 'includes/header.php';
                     <p>If you have any questions about this Privacy Policy or our data practices, please contact us:</p>
                     <div class="bg-light p-3 rounded">
                         <p class="mb-1"><strong>Email:</strong> nopoleflairan@gmail.com</p>
-                        <p class="mb-1"><strong>Phone:</strong> +237 123 456 789</p>
+                        <p class="mb-1"><strong>Phone:</strong> +237 650 877 656</p>
                         <p class="mb-0"><strong>Address:</strong> Yaoundé, Cameroon</p>
                     </div>
                     

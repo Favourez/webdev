@@ -20,7 +20,7 @@ require_once 'includes/session.php';
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
             <a class="navbar-brand" href="index.php">
-                <i class="fas fa-calendar-alt me-2"></i>EventHive
+                <i class="fas fa-calendar-alt me-2"></i>KamerFest
             </a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
