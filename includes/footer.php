@@ -5,8 +5,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h5><i class="fas fa-calendar-alt me-2"></i>EventBook</h5>
-                    <p class="mb-0">Your premier destination for event booking and management.</p>
+                    <h5><i class="fas fa-calendar-alt me-2"></i>EventHive</h5>
+                    <p class="mb-0">Cameroon's premier platform for discovering and booking amazing events.</p>
                 </div>
                 <div class="col-md-3">
                     <h6>Quick Links</h6>
@@ -20,7 +20,7 @@
                 <div class="col-md-3">
                     <h6>Support</h6>
                     <ul class="list-unstyled">
-                        <li><a href="help.php" class="text-light text-decoration-none">Help Center</a></li>
+                        <li><a href="contact.php" class="text-light text-decoration-none">Help Center</a></li>
                         <li><a href="terms.php" class="text-light text-decoration-none">Terms of Service</a></li>
                         <li><a href="privacy.php" class="text-light text-decoration-none">Privacy Policy</a></li>
                     </ul>
@@ -29,7 +29,7 @@
             <hr class="my-3">
             <div class="row">
                 <div class="col-md-6">
-                    <p class="mb-0">&copy; 2024 EventBook. All rights reserved.</p>
+                    <p class="mb-0">&copy; 2024 EventHive Cameroon. All rights reserved.</p>
                 </div>
                 <div class="col-md-6 text-md-end">
                     <a href="#" class="text-light me-3"><i class="fab fa-facebook"></i></a>

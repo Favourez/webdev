@@ -68,17 +68,17 @@ include 'includes/header.php';
                 <form method="GET" class="row g-3">
                     <div class="col-md-4">
                         <label for="search" class="form-label">Search Events</label>
-                        <input type="text" class="form-control" id="search" name="search" 
+                        <input type="text" class="form-control" id="search" name="search"
                                placeholder="Event name, organizer..." value="<?php echo htmlspecialchars($search); ?>">
                     </div>
                     <div class="col-md-3">
                         <label for="location" class="form-label">Location</label>
-                        <input type="text" class="form-control" id="location" name="location" 
+                        <input type="text" class="form-control" id="location" name="location"
                                placeholder="City, State" value="<?php echo htmlspecialchars($location); ?>">
                     </div>
                     <div class="col-md-3">
                         <label for="date" class="form-label">Date</label>
-                        <input type="date" class="form-control" id="date" name="date" 
+                        <input type="date" class="form-control" id="date" name="date"
                                value="<?php echo htmlspecialchars($date); ?>">
                     </div>
                     <div class="col-md-2">
@@ -107,7 +107,7 @@ include 'includes/header.php';
                         Upcoming Events
                     <?php endif; ?>
                 </h2>
-                
+
                 <?php if (!empty($search) || !empty($location) || !empty($date)): ?>
                     <div class="text-center mb-3">
                         <a href="index.php" class="btn btn-outline-secondary">
@@ -139,7 +139,7 @@ include 'includes/header.php';
                                 </div>
 
                             </div>
-                            
+
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title"><?php echo htmlspecialchars($event['name']); ?></h5>
                                 <p class="card-text text-muted small mb-2">
@@ -152,17 +152,17 @@ include 'includes/header.php';
                                 <p class="card-text text-muted small mb-3">
                                     <i class="fas fa-user me-2"></i><?php echo htmlspecialchars($event['organizer']); ?>
                                 </p>
-                                
+
                                 <p class="card-text flex-grow-1">
                                     <?php echo htmlspecialchars(substr($event['description'], 0, 100)) . '...'; ?>
                                 </p>
-                                
+
                                 <div class="mt-auto">
                                     <div class="d-flex justify-content-between align-items-center mb-3">
                                         <span class="h5 text-primary mb-0"><?php echo number_format($event['price'], 0); ?> CFA</span>
                                         <small class="text-muted"><?php echo $event['available_tickets']; ?> tickets left</small>
                                     </div>
-                                    
+
                                     <div class="d-grid">
                                         <a href="event_details.php?id=<?php echo $event['id']; ?>" class="btn btn-primary">
                                             <i class="fas fa-info-circle me-2"></i>View Details

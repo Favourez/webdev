@@ -1,307 +1,268 @@
-# Online Event Booking System
+# EventHive - Event Booking Platform
 
-A comprehensive web application for browsing, searching, and booking event tickets built with HTML, CSS, Bootstrap, JavaScript, PHP, and MySQL.
+EventHive is Cameroon's premier event booking platform that connects event enthusiasts with amazing experiences across the country. Built with PHP and MySQL, it provides a seamless, secure, and user-friendly platform for discovering, booking, and managing event tickets.
 
-## Features
+## 🎯 Project Overview
 
-### ✅ Completed Features
+EventHive serves as a comprehensive event management solution designed specifically for the Cameroon market, featuring CFA franc pricing, local event focus, and culturally appropriate design elements.
 
-1. **User Authentication** (5 marks)
-   - User registration and login system
-   - Session management
-   - Password hashing and security
-   - Profile management
+### 🌟 Key Features
 
-2. **Event Listings Page** (5 marks)
-   - Display catalog of available events
-   - Event details: name, date, time, venue, organizer, image, price
-   - Responsive card-based layout
-   - Event status management
+#### For Event Attendees
+- **Event Discovery**: Browse and search events by name, location, and date
+- **Secure Booking**: Safe and reliable ticket purchasing system
+- **Digital Tickets**: QR code-enabled tickets for easy event entry
+- **User Dashboard**: Manage bookings and view event history
+- **Profile Management**: Update personal information and preferences
+- **Mobile-Friendly**: Responsive design works on all devices
 
-3. **Search Functionality** (5 marks)
-   - Search by event name, organizer, or description
-   - Filter by location and date
-   - Real-time search results
-   - Clear filters option
+#### For Event Organizers
+- **Event Management**: Create and manage event listings
+- **Booking Analytics**: Track ticket sales and attendee data
+- **Customer Communication**: Direct access to attendee information
 
-4. **Event Details Page** (5 marks)
-   - Detailed event information
-   - Venue and location details
-   - Organizer contact information
-   - **Interactive OpenStreetMap integration**
-   - **Geocoding with Nominatim API**
-   - **Directions and map search links**
-   - Interactive booking interface
-   - Ticket availability display
+#### For Administrators
+- **Comprehensive Dashboard**: Real-time analytics and reporting
+- **User Management**: Monitor and manage user accounts
+- **Event Oversight**: Approve and manage all platform events
+- **Data Export**: Generate reports for business intelligence
 
-5. **Booking Cart** (10 marks)
-   - Add events to cart with AJAX
-   - View and manage cart items
-   - Update quantities
-   - Remove items from cart
-   - Real-time cart count updates
+## 🏗️ Technical Architecture
 
-6. **Checkout Process** (5 marks)
-   - Attendee information form
-   - Payment method selection (simulated)
-   - Order summary
-   - Booking confirmation
-   - Reference number generation
-
-7. **Booking History** (10 marks)
-   - User dashboard with statistics
-   - View past and upcoming bookings
-   - Booking details and status
-   - Filter bookings by status
-   - **QR Code ticket generation (links to printable receipt)**
-   - **Download receipt with booking details**
-   - **CFA currency support for Cameroon market**
-
-8. **Admin Panel** (15 marks)
-   - Admin authentication
-   - Dashboard with statistics
-   - Event management (CRUD operations)
-   - Booking management
-   - User management
-   - Reports generation
-
-## Technology Stack
-
-- **Frontend**: HTML5, CSS3, Bootstrap 5, JavaScript, jQuery
+### Technology Stack
 - **Backend**: PHP 7.4+
 - **Database**: MySQL 5.7+
-- **Icons**: Font Awesome 6
-- **Styling**: Custom CSS with Bootstrap components
+- **Frontend**: HTML5, CSS3, Bootstrap 5, JavaScript
+- **Libraries**: Font Awesome, jQuery
+- **Security**: Password hashing, prepared statements, session management
 
-## Installation Instructions
+### File Structure
+```
+EventHive/
+├── admin/                  # Admin panel
+│   ├── bookings.php       # Booking management
+│   ├── events.php         # Event management
+│   ├── users.php          # User management
+│   ├── reports.php        # Analytics and reports
+│   └── includes/          # Admin components
+├── auth/                  # Authentication system
+│   ├── login.php          # User login
+│   ├── register.php       # User registration
+│   └── logout.php         # Session termination
+├── config/                # Configuration files
+│   └── database.php       # Database connection
+├── includes/              # Shared components
+│   ├── header.php         # Site header
+│   ├── footer.php         # Site footer
+│   ├── session.php        # Session management
+│   └── qr_generator.php   # QR code generation
+├── images/                # Event images
+│   └── events/            # Event-specific images
+├── css/                   # Stylesheets
+├── js/                    # JavaScript files
+├── ajax/                  # AJAX endpoints
+├── database/              # Database schema
+└── *.php                  # Main application pages
+```
+
+## 🚀 Installation Guide
 
 ### Prerequisites
-- XAMPP/WAMP/LAMP server
-- PHP 7.4 or higher
+- Web server (Apache/Nginx)
+- PHP 7.4 or higher with extensions:
+  - PDO MySQL
+  - GD (for image processing)
+  - Mail (for notifications)
 - MySQL 5.7 or higher
-- Web browser
 
 ### Setup Steps
 
-1. **Clone/Download the project**
+1. **Clone/Download the Project**
    ```bash
-   # Place the project in your web server directory
-   # For XAMPP: C:\xampp\htdocs\webdev
+   # Place files in your web server directory
+   # e.g., /var/www/html/eventhive or C:\xampp\htdocs\eventhive
    ```
 
-2. **Start your web server**
-   - Start Apache and MySQL in XAMPP/WAMP
-   - Ensure PHP and MySQL are running
-
-3. **Automatic Database Setup (Recommended)**
-   ```
-   # Navigate to the setup page in your browser
-   http://localhost/webdev/setup.php
-
-   # Click "Run Database Setup" to automatically:
-   # - Create the database
-   # - Create all tables
-   # - Insert sample data
-   # - Create admin user
-   ```
-
-4. **Manual Database Setup (Alternative)**
+2. **Database Configuration**
    ```sql
-   # If automatic setup fails, manually:
-   # 1. Open phpMyAdmin or MySQL command line
-   # 2. Import the SQL file: database/schema.sql
-   # 3. Or copy and paste the SQL content
+   -- Create database
+   CREATE DATABASE eventhive;
+
+   -- Import schema
+   mysql -u username -p eventhive < database/schema.sql
    ```
 
-5. **Configuration (if needed)**
+3. **Configure Database Connection**
    ```php
-   # Update database credentials in config/database.php if different
-   define('DB_HOST', 'localhost');
-   define('DB_USER', 'root');
-   define('DB_PASS', '');
-   define('DB_NAME', 'event_booking_system');
+   // Edit config/database.php
+   $host = 'localhost';
+   $dbname = 'eventhive';
+   $username = 'your_username';
+   $password = 'your_password';
    ```
 
-6. **Test the Installation**
-   ```
-   # Test functionality page
-   http://localhost/webdev/test_functionality.php
-
-   # Main Website
-   http://localhost/webdev/
-
-   # Admin Panel
-   http://localhost/webdev/admin/
+4. **Set File Permissions**
+   ```bash
+   chmod 755 images/events/
+   chmod 644 config/database.php
    ```
 
-## Default Login Credentials
+5. **Create Admin Account**
+   - Visit: `your-domain.com/admin/create_admin.php`
+   - Create your admin credentials
+   - Delete the create_admin.php file after use
 
-### Admin Access
-- **URL**: `http://localhost/webdev/admin/`
-- **Username**: `admin`
-- **Password**: `admin123`
+## 📱 User Guide
 
-### User Registration
-- Users can register through the main website
-- Or create test users through the registration form
+### For Event Attendees
 
-## Project Structure
+1. **Registration & Login**
+   - Create account with email and password
+   - Verify email address
+   - Login to access full features
 
-```
-webdev/
-├── admin/                  # Admin panel
-│   ├── includes/          # Admin headers/footers
-│   ├── index.php         # Admin dashboard
-│   ├── login.php         # Admin login
-│   └── logout.php        # Admin logout
-├── ajax/                  # AJAX handlers
-│   ├── add_to_cart.php   # Add items to cart
-│   ├── get_cart_count.php # Get cart count
-│   ├── update_cart.php   # Update cart quantities
-│   └── remove_from_cart.php # Remove cart items
-├── auth/                  # Authentication
-│   ├── login.php         # User login
-│   ├── register.php      # User registration
-│   └── logout.php        # User logout
-├── config/               # Configuration
-│   └── database.php      # Database connection
-├── css/                  # Stylesheets
-│   └── style.css         # Custom styles
-├── database/             # Database files
-│   └── schema.sql        # Database schema
-├── images/               # Image assets
-│   └── events/           # Event images
-├── includes/             # Common includes
-│   ├── header.php        # Main header
-│   ├── footer.php        # Main footer
-│   ├── session.php       # Session management
-│   └── qr_generator.php  # QR code generation
-├── js/                   # JavaScript files
-│   └── main.js           # Main JavaScript
-├── index.php             # Homepage/Event listings
-├── events.php            # All events page
-├── event_details.php     # Event details page
-├── cart.php              # Shopping cart
-├── checkout.php          # Checkout process
-├── dashboard.php         # User dashboard
-├── view_ticket.php       # Ticket viewer with QR code
-├── download_ticket.php   # Ticket download handler
-├── booking_details.php   # Detailed booking view
-├── setup.php             # Database setup script
-├── test_functionality.php # System testing page
-└── README.md             # This file
-```
-
-## Key Features Implemented
-
-### Frontend Features
-- Responsive design with Bootstrap 5
-- Interactive user interface
-- AJAX-powered cart functionality
-- Form validation
-- Loading states and animations
-- Mobile-friendly navigation
-
-### Backend Features
-- Secure user authentication
-- Session management
-- Database abstraction with PDO
-- SQL injection prevention
-- XSS protection
-- CSRF token implementation
-- Error handling and logging
-
-### Database Design
-- Normalized database structure
-- Foreign key relationships
-- Indexes for performance
-- Sample data included
-
-## Testing the Application
-
-### User Flow Testing
-1. **Registration/Login**
-   - Register a new user account
-   - Login with credentials
-   - Test session management
-
-2. **Event Browsing**
-   - Browse events on homepage
-   - Use search and filter functionality
-   - View event details
+2. **Browsing Events**
+   - Use search filters (location, date, keywords)
+   - View event details and images
+   - Check ticket availability and pricing
 
 3. **Booking Process**
-   - Add events to cart
-   - Update cart quantities
-   - Proceed to checkout
-   - Complete booking
+   - Add tickets to cart
+   - Review booking details
+   - Complete secure checkout
+   - Receive confirmation email
 
-4. **Dashboard**
-   - View booking history
-   - Check booking details
-   - Filter bookings
+4. **Managing Bookings**
+   - Access dashboard for booking history
+   - Download QR code tickets
+   - Print receipt copies
+   - Update profile information
 
-### Admin Testing
-1. **Admin Login**
-   - Login to admin panel
-   - View dashboard statistics
+### For Administrators
+
+1. **Admin Dashboard**
+   - Login at `/admin/login.php`
+   - View real-time statistics
+   - Monitor platform activity
 
 2. **Event Management**
-   - Add new events
-   - Edit existing events
-   - Manage event status
+   - Create new events
+   - Upload event images
+   - Set pricing and availability
+   - Monitor ticket sales
 
-3. **Booking Management**
-   - View all bookings
-   - Generate reports
+3. **User Management**
+   - View user accounts
+   - Monitor user activity
+   - Handle support requests
 
-## Future Enhancements
+4. **Reporting**
+   - Generate sales reports
+   - Export user data
+   - Analyze booking trends
 
-- Payment gateway integration
-- Email notifications
-- QR code generation for tickets
-- Event categories and tags
-- Advanced reporting
-- File upload for event images
-- Social media integration
+## 🔒 Security Features
+
+### Data Protection
+- **Password Security**: Bcrypt hashing with salt
+- **SQL Injection Prevention**: Prepared statements
+- **XSS Protection**: Input sanitization and output encoding
+- **Session Security**: Secure session handling
+- **File Upload Security**: Image validation and sanitization
+
+### Privacy Compliance
+- **Data Minimization**: Collect only necessary information
+- **User Rights**: Profile management and account deletion
+- **Secure Storage**: Encrypted sensitive data
+- **Access Controls**: Role-based permissions
+
+## 💰 Cameroon-Specific Features
+
+### Localization
+- **Currency**: All prices in CFA francs
+- **Locations**: Focus on major Cameroon cities (Yaoundé, Douala, Bafoussam)
+- **Language**: English with local context
+- **Cultural Elements**: Cameroon flag and local references
+
+### Event Categories
+- Technology conferences
+- Music festivals
+- Business networking
+- Art exhibitions
+- Food & wine events
+- Educational workshops
+- Cultural celebrations
+- Sports events
+
+## 📧 Contact & Support
+
+### Contact Information
+- **Email**: nopoleflairan@gmail.com
+- **Phone**: +237 123 456 789
+- **Location**: Yaoundé, Cameroon 🇨🇲
+
+### Support Features
+- Contact form with email notifications
+- FAQ section
+- User profile management
+- Account deletion option
+
+## 📄 Legal Pages
+
+### Included Legal Documents
+- **Terms of Service**: Comprehensive user agreement
+- **Privacy Policy**: Data protection and user rights
+- **About Page**: Platform introduction and mission
+- **Contact Page**: Support and communication
+
+## 🔧 Maintenance & Updates
+
+### Regular Tasks
+- Database backups
+- Security updates
+- Performance monitoring
+- User feedback review
+
+### Monitoring
+- Event booking success rates
+- User registration trends
+- Payment processing status
+- System performance metrics
+
+## 🎨 Design Philosophy
+
+EventHive maintains a clean, professional design that builds trust while remaining accessible to all users. The interface prioritizes:
+
+- **Clarity**: Clear navigation and information hierarchy
+- **Trust**: Professional appearance and secure processes
+- **Accessibility**: Works on all devices and connection speeds
+- **Local Appeal**: Cameroon-focused content and imagery
+
+## 📊 Analytics & Reporting
+
+### Available Reports
+- Event booking statistics
+- User registration trends
+- Revenue analytics
+- Popular event categories
+- Geographic distribution
+
+### Export Options
+- CSV format for spreadsheet analysis
+- PDF reports for presentations
+- Real-time dashboard metrics
+
+## 🚀 Future Enhancements
+
+### Planned Features
 - Mobile app development
-
-## Troubleshooting
-
-### Common Issues
-
-1. **Database Connection Error**
-   - Check database credentials in `config/database.php`
-   - Ensure MySQL service is running
-   - Verify database exists
-
-2. **Session Issues**
-   - Check PHP session configuration
-   - Ensure cookies are enabled
-   - Clear browser cache
-
-3. **AJAX Not Working**
-   - Check browser console for errors
-   - Verify jQuery is loaded
-   - Check file paths
-
-4. **Styling Issues**
-   - Verify Bootstrap CDN links
-   - Check custom CSS file path
-   - Clear browser cache
-
-## Support
-
-For technical support or questions about this project:
-- Check the code comments for detailed explanations
-- Review the database schema for data relationships
-- Test with sample data provided
-
-## License
-
-This project is created for educational purposes as part of a web development course.
+- Advanced payment integrations
+- Event organizer self-service portal
+- Enhanced analytics dashboard
+- Multi-language support
 
 ---
 
-**Total Features Implemented**: 8/8 (All required features completed)
-**Estimated Marks**: 60/60 (Full marks for all implemented features)
+**EventHive** - Connecting Cameroon to Amazing Events 🇨🇲
+
+*Built with ❤️ for the Cameroon event community*
